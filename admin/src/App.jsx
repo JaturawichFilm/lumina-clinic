@@ -22,8 +22,8 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const fetchData = async (showLoader = true) => {
+        if (showLoader) setLoading(true);
         try {
             const [leadsRes, apptRes] = await Promise.all([
                 fetch(`${API_BASE}/api/leads`, { headers: HEADERS }),
@@ -34,7 +34,7 @@ function App() {
         } catch (e) {
             console.error('Error fetching data:', e);
         }
-        setLoading(false);
+        if (showLoader) setLoading(false);
     };
 
     useEffect(() => { fetchData(); }, []);
@@ -49,28 +49,40 @@ function App() {
     }, [isMobileMenuOpen]);
 
     const updateAppointmentStatus = async (id, status) => {
+        // Optimistic UI Update
+        const previousAppointments = [...appointments];
+        setAppointments(prev => prev.map(appt => appt.id === id ? { ...appt, status } : appt));
+
         try {
             await fetch(`${API_BASE}/api/appointments/${id}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', ...HEADERS },
                 body: JSON.stringify({ status })
             });
-            fetchData();
+            fetchData(false); // Sync in background without loader
         } catch (e) {
             console.error('Error updating status:', e);
+            setAppointments(previousAppointments); // Rollback on error
+            alert('เกิดข้อผิดพลาดในการปรับสถานะ กรุณาลองใหม่อีกครั้ง');
         }
     };
 
     const updateLeadStatus = async (id, status) => {
+        // Optimistic UI Update
+        const previousLeads = [...leads];
+        setLeads(prev => prev.map(lead => lead.id === id ? { ...lead, status } : lead));
+
         try {
             await fetch(`${API_BASE}/api/leads/${id}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', ...HEADERS },
                 body: JSON.stringify({ status })
             });
-            fetchData();
+            fetchData(false); // Sync in background without loader
         } catch (e) {
             console.error('Error updating lead:', e);
+            setLeads(previousLeads); // Rollback on error
+            alert('เกิดข้อผิดพลาดในการปรับสถานะ กรุณาลองใหม่อีกครั้ง');
         }
     };
 
