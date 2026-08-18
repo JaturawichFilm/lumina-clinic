@@ -5,7 +5,7 @@ import {
     Menu
 } from 'lucide-react';
 
-const API_BASE = 'https://cough-congrats-crane.ngrok-free.dev';
+const API_BASE = 'https://lumina-clinic-iota.vercel.app';
 const HEADERS = { 'ngrok-skip-browser-warning': 'true' };
 
 const serviceNames = {

@@ -24,7 +24,7 @@ function BookingForm({ profile }) {
                 displayName: profile.displayName
             };
 
-            const response = await fetch('https://cough-congrats-crane.ngrok-free.dev/api/appointments', {
+            const response = await fetch('https://lumina-clinic-iota.vercel.app/api/appointments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
