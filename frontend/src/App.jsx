@@ -58,10 +58,10 @@ function App() {
                             เพื่อให้ระบบสามารถส่งข้อความแจ้งเตือนสถานะคิวหาท่านได้<br />กรุณากดแอดเพื่อนกับทาง Lumina Clinic ครับ
                         </p>
                         <button
-                            onClick={() => liff.closeWindow()}
+                            onClick={() => window.location.href = "https://line.me/R/ti/p/@210npahy"}
                             style={{ background: '#7e22ce', color: 'white', padding: '0.85rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', width: '100%', fontSize: '1rem', cursor: 'pointer' }}
                         >
-                            ปิดหน้านี้เพื่อกลับไปกดเพิ่มเพื่อน
+                            คลิกที่นี่เพื่อเพิ่มเพื่อน (Add Friend)
                         </button>
                     </div>
                 )}
