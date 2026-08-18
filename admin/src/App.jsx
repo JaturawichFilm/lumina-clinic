@@ -213,7 +213,7 @@ function App() {
                                                     <tr key={appt.id}>
                                                         <td>
                                                             <div className="profile-cell">
-                                                                {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                                {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                                 <div>
                                                                     <div className="name">{appt.lead?.displayName || '-'}</div>
                                                                     <div className="line-id">{appt.lead?.lineId?.slice(0, 10)}...</div>
@@ -253,7 +253,7 @@ function App() {
                                             <div className="data-card" key={`mobile-${appt.id}`}>
                                                 <div className="data-card-header">
                                                     <div className="profile-cell">
-                                                        {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                        {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                         <div>
                                                             <div className="name">{appt.lead?.displayName || '-'}</div>
                                                             <div className="line-id">{appt.lead?.lineId?.slice(0, 10)}...</div>
@@ -327,7 +327,7 @@ function App() {
                                                     <tr key={lead.id}>
                                                         <td>
                                                             <div className="profile-cell">
-                                                                {lead.pictureUrl ? <img src={lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                                {lead.pictureUrl ? <img src={lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                                 <div>
                                                                     <div className="name">{lead.displayName}</div>
                                                                     <div className="line-id">{lead.lineId.slice(0, 12)}...</div>
@@ -362,7 +362,7 @@ function App() {
                                             <div className="data-card" key={`mobile-${lead.id}`}>
                                                 <div className="data-card-header">
                                                     <div className="profile-cell">
-                                                        {lead.pictureUrl ? <img src={lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                        {lead.pictureUrl ? <img src={lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                         <div>
                                                             <div className="name">{lead.displayName}</div>
                                                             <div className="line-id">{lead.lineId.slice(0, 12)}...</div>
@@ -433,7 +433,7 @@ function App() {
                                                     <tr key={appt.id}>
                                                         <td>
                                                             <div className="profile-cell">
-                                                                {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                                {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                                 <div>
                                                                     <div className="name">{appt.lead?.displayName || '-'}</div>
                                                                 </div>
@@ -472,7 +472,7 @@ function App() {
                                             <div className="data-card" key={`mobile-page-${appt.id}`}>
                                                 <div className="data-card-header">
                                                     <div className="profile-cell">
-                                                        {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} />}
+                                                        {appt.lead?.pictureUrl ? <img src={appt.lead.pictureUrl} alt="" /> : <UserSquare2 size={30} color="#CFA65B" />}
                                                         <div>
                                                             <div className="name">{appt.lead?.displayName || '-'}</div>
                                                         </div>
