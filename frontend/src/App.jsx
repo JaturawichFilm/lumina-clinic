@@ -6,6 +6,7 @@ import { CalendarDays } from 'lucide-react'
 function App() {
     const [profile, setProfile] = useState(null);
     const [isFriend, setIsFriend] = useState(null);
+    const [isLiffReady, setIsLiffReady] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
