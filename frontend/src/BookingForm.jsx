@@ -48,6 +48,16 @@ function BookingForm({ profile }) {
                     background: '#FBFBF9',
                     backdrop: `rgba(34, 18, 57, 0.4)`
                 }).then(() => {
+                    // Reset form state to empty
+                    setFormData({
+                        service: '',
+                        date: '',
+                        time: '',
+                        phone: '',
+                        lineId: profile.userId,
+                        displayName: profile.displayName
+                    });
+
                     if (window.liff && window.liff.isInClient()) {
                         window.liff.closeWindow();
                     } else {
