@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import './BookingForm.css';
 
 function BookingForm({ profile }) {
@@ -38,19 +39,40 @@ function BookingForm({ profile }) {
             });
 
             if (response.ok) {
-                alert('ระบบส่งข้อมูลการจองเรียบร้อยแล้วครับ! โปรดเช็คข้อความยืนยันใน LINE ของท่าน');
-                if (window.liff && window.liff.isInClient()) {
-                    window.liff.closeWindow();
-                } else {
-                    console.log('Tested in browser, form submitted successfully!');
-                }
+                Swal.fire({
+                    title: 'ขอบคุณที่ไว้วางใจ!',
+                    text: 'ระบบได้รับข้อมูลการจองของคุณเรียบร้อยแล้ว แอดมินจะติดต่อกลับเพื่อยืนยันคิวผ่านทาง LINE อีกครั้งนะครับ',
+                    icon: 'success',
+                    confirmButtonText: 'ปิดหน้าต่าง',
+                    confirmButtonColor: '#381E57', // Lumina Purple
+                    background: '#FBFBF9',
+                    backdrop: `rgba(34, 18, 57, 0.4)`
+                }).then(() => {
+                    if (window.liff && window.liff.isInClient()) {
+                        window.liff.closeWindow();
+                    } else {
+                        console.log('Tested in browser, form submitted successfully!');
+                    }
+                });
             } else {
                 const errorData = await response.json().catch(() => ({}));
-                alert('เกิดข้อผิดพลาด: ' + (errorData.details || errorData.error || '500 Internal Server Error'));
+                Swal.fire({
+                    title: 'เกิดข้อผิดพลาด',
+                    text: errorData.details || errorData.error || '500 Internal Server Error',
+                    icon: 'error',
+                    confirmButtonText: 'ลองใหม่อีกครั้ง',
+                    confirmButtonColor: '#CFA65B'
+                });
             }
         } catch (err) {
             console.error(err);
-            alert('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้');
+            Swal.fire({
+                title: 'ไม่สามารถเชื่อมต่อได้',
+                text: 'กรุณาตรวจสอบอินเทอร์เน็ตของท่านแล้วลองอีกครั้ง',
+                icon: 'warning',
+                confirmButtonText: 'เข้าใจแล้ว',
+                confirmButtonColor: '#CFA65B'
+            });
         } finally {
             setIsSubmitting(false);
         }
