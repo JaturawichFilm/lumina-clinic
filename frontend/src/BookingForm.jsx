@@ -26,7 +26,8 @@ function BookingForm({ profile }) {
             const payload = {
                 ...formData,
                 lineId: profile.userId,
-                displayName: profile.displayName
+                displayName: profile.displayName,
+                pictureUrl: profile.pictureUrl
             };
 
             const response = await fetch('https://lumina-clinic-iota.vercel.app/api/appointments', {

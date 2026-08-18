@@ -107,7 +107,7 @@ async function handleEvent(event) {
 // API Backend to receive form data
 app.post('/api/appointments', express.json(), async (req, res) => {
     try {
-        const { service, date, time, phone, lineId, displayName } = req.body;
+        const { service, date, time, phone, lineId, displayName, pictureUrl } = req.body;
 
         if (!lineId || !service || !date) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -116,10 +116,14 @@ app.post('/api/appointments', express.json(), async (req, res) => {
         // Get or create the Lead from lineId
         const lead = await prisma.lead.upsert({
             where: { lineId },
-            update: {},
+            update: {
+                displayName: displayName || 'Unknown',
+                pictureUrl: pictureUrl || null
+            },
             create: {
                 lineId,
                 displayName: displayName || 'Unknown',
+                pictureUrl: pictureUrl || null,
                 status: 'NEW'
             }
         });
