@@ -10,6 +10,7 @@ function BookingForm({ profile }) {
         lineId: profile.userId,
         displayName: profile.displayName
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,6 +18,9 @@ function BookingForm({ profile }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isSubmitting) return; // Prevent double clicks
+
+        setIsSubmitting(true);
         try {
             const payload = {
                 ...formData,
@@ -47,6 +51,8 @@ function BookingForm({ profile }) {
         } catch (err) {
             console.error(err);
             alert('ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -87,7 +93,9 @@ function BookingForm({ profile }) {
                 <input type="tel" name="phone" placeholder="08X-XXX-XXXX" value={formData.phone} onChange={handleChange} required />
             </div>
 
-            <button type="submit" className="submit-btn">ยืนยันการจองคิว</button>
+            <button type="submit" className={`submit-btn ${isSubmitting ? 'submitting' : ''}`} disabled={isSubmitting}>
+                {isSubmitting ? 'กำลังส่งข้อมูลจองคิว...' : 'ยืนยันการจองคิว'}
+            </button>
             <p className="note-text">*ข้อมูลบัญชี LINE ของท่านจะถูกอ้างอิงอัตโนมัติ ไม่ต้องกรอกเพิ่มเติม</p>
         </form>
     );

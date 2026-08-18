@@ -51,15 +51,15 @@ function App() {
                 {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
 
                 {isLiffReady && isFriend === false && (
-                    <div style={{ textAlign: 'center', padding: '2rem 1rem', background: 'white', borderRadius: '16px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-                        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>⚠️</div>
-                        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.5rem' }}>กรุณาเพิ่มเพื่อนก่อนทำรายการ</h2>
-                        <p style={{ color: '#64748b', marginBottom: '1.5rem', lineHeight: '1.5' }}>
-                            เพื่อให้ระบบสามารถส่งข้อความแจ้งเตือนสถานะคิวหาท่านได้<br />กรุณากดแอดเพื่อนกับทาง Lumina Clinic ครับ
+                    <div className="add-friend-card">
+                        <div className="add-friend-icon">⚠️</div>
+                        <h2 className="add-friend-title">กรุณาเพิ่มเพื่อนก่อนทำรายการ</h2>
+                        <p className="add-friend-text">
+                            เพื่อให้ระบบสามารถส่งข้อความ<br />แจ้งเตือนสถานะคิวหาท่านได้<br /><br />กรุณากดแอดเพื่อนกับทาง<br /><strong style={{ fontWeight: '500', color: 'var(--purple-dark)' }}>Lumina Clinic</strong> ก่อนนะครับ
                         </p>
                         <button
                             onClick={() => window.location.href = "https://line.me/R/ti/p/@210npahy"}
-                            style={{ background: '#7e22ce', color: 'white', padding: '0.85rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', width: '100%', fontSize: '1rem', cursor: 'pointer' }}
+                            className="add-friend-btn"
                         >
                             คลิกที่นี่เพื่อเพิ่มเพื่อน (Add Friend)
                         </button>
