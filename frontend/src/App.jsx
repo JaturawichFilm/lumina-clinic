@@ -5,7 +5,7 @@ import { CalendarDays } from 'lucide-react'
 
 function App() {
     const [profile, setProfile] = useState(null);
-    const [isLiffReady, setIsLiffReady] = useState(false);
+    const [isFriend, setIsFriend] = useState(null);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -14,12 +14,14 @@ function App() {
                 if (!liff.isLoggedIn()) {
                     liff.login();
                 } else {
-                    return liff.getProfile();
+                    return Promise.all([liff.getProfile(), liff.getFriendship()]);
                 }
             })
-            .then((profileData) => {
-                if (profileData) {
+            .then((results) => {
+                if (results) {
+                    const [profileData, friendshipData] = results;
                     setProfile(profileData);
+                    setIsFriend(friendshipData.friendFlag);
                     setIsLiffReady(true);
                 }
             })
@@ -46,7 +48,24 @@ function App() {
                     </div>
                 )}
                 {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-                {isLiffReady && profile && <BookingForm profile={profile} />}
+
+                {isLiffReady && isFriend === false && (
+                    <div style={{ textAlign: 'center', padding: '2rem 1rem', background: 'white', borderRadius: '16px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+                        <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>⚠️</div>
+                        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.5rem' }}>กรุณาเพิ่มเพื่อนก่อนทำรายการ</h2>
+                        <p style={{ color: '#64748b', marginBottom: '1.5rem', lineHeight: '1.5' }}>
+                            เพื่อให้ระบบสามารถส่งข้อความแจ้งเตือนสถานะคิวหาท่านได้<br />กรุณากดแอดเพื่อนกับทาง Lumina Clinic ครับ
+                        </p>
+                        <button
+                            onClick={() => liff.closeWindow()}
+                            style={{ background: '#7e22ce', color: 'white', padding: '0.85rem 1.5rem', borderRadius: '12px', border: 'none', fontWeight: 'bold', width: '100%', fontSize: '1rem', cursor: 'pointer' }}
+                        >
+                            ปิดหน้านี้เพื่อกลับไปกดเพิ่มเพื่อน
+                        </button>
+                    </div>
+                )}
+
+                {isLiffReady && isFriend === true && profile && <BookingForm profile={profile} />}
             </main>
         </div>
     )
